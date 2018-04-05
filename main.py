@@ -65,11 +65,7 @@ for i in range(iters_num):
     mid_time = time.time()
     one = mid_time - tmp_time
     print(str(i+1) + " time : " + str(int(one)) + "초")
-    tmp_time = mid_time
-    
-    
-    
-    
+    tmp_time = mid_time    
     
 #5.총 걸린시간    
 end_time = time.time()
