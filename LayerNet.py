@@ -1,19 +1,19 @@
 from functions import *
 
 class TwoLayerNet:
-    def __init__(slef, input_size, hidden_size, output_size, weight_init_std=0.01):     #초기 파라미터값 설정
+    def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):     #초기 파라미터값 설정
         self.params = {}
         self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)  #(784,50)
-        self.prrmas['b1'] = np.zeros(hidden_size)                                       #(50,)
-        self.params['W1'] = weight_init_std * np.random.randn(hidden_size,output_size)  #(50,10)
-        self.prrmas['b1'] = np.zeros(output_size)                                       #(10,)
+        self.params['b1'] = np.zeros(hidden_size)                                       #(50,)
+        self.params['W2'] = weight_init_std * np.random.randn(hidden_size,output_size)  #(50,10)
+        self.params['b2'] = np.zeros(output_size)                                       #(10,)
     
     def predict(self, x): #(100,784)                                                              #이미지 예측 
-        W1,W1 = self.params['W1'], self.params['W2']                 
-        b1,b2 = self.params['b1'], self.prrams['b2']                                    #활성화 함수
+        W1,W2 = self.params['W1'], self.params['W2']                 
+        b1,b2 = self.params['b1'], self.params['b2']                                    #활성화 함수
         a1 = np.dot(x, W1) + b1                                                         #A = XW + B    
         z1 = sigmoid(a1)                                                                #sigmoid()
-        a2 = np.dot(z1,W2) + b2
+        a2 = np.dot(z1, W2) + b2
         y = softmax(a2)
         return y    #(100,10)
     

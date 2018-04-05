@@ -21,12 +21,13 @@ from LayerNet import TwoLayerNet
 network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)   #클래스객체생성
 
 #하이퍼 파라미터
-iters_num = 1                   #반복횟수
+iters_num = 2                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
-batch_size = 100                 #미니배치 크기 100
+batch_size = 10                 #미니배치 크기 100
 learning_rate = 0.1             #학습률
 
 #학습 시작
+import numpy as np
 for i in range(iters_num):
     batch_mask = np.random.choice(train_size, batch_size) #(100,)
     x_batch = x_train[batch_mask]   #(10000,784)
