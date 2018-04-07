@@ -1,3 +1,5 @@
+import numpy as np
+
 class Sigmoid:
     def __init__(self):
         self.out = None
@@ -9,11 +11,11 @@ class Sigmoid:
     
     def backward(self, dout):
         dx = dout * (1.0 - self.out) * self.out
-        retrun dx
+        return dx
         
         
 class Affine:
-    def __init__(self):
+    def __init__(self, W, b):
         self.W = W
         self.b = b
         self.x = None
@@ -25,9 +27,10 @@ class Affine:
         out = np.dot(x,self.W) + self.b
         return out
         
-    def backward(self, dout)
-    dx = np.dot(dout, self.x.T, dout)
-    self.db = np.sum(dout, axis=0)
+    def backward(self, dout):
+        dx = np.dot(dout, self.x.T, dout)
+        self.db = np.sum(dout, axis=0)
+        return dx
     
     
 class SoftmaxWithLoss:
