@@ -1,4 +1,3 @@
-
 #URL의 파일다운
 import urllib.request
 mnist_url = "https://raw.githubusercontent.com/WegraLee/deep-learning-from-scratch/master/dataset/mnist.py"
@@ -6,7 +5,6 @@ a=urllib.request.urlopen(mnist_url)
 k=open("mnist.py","wb")
 k.write(a.read())
 k.close()
-
 
 #시간 확인 
 import time   
@@ -22,8 +20,6 @@ from LayerNet import TwoLayerNet
 network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)   #클래스객체생성
 
 #3.하이퍼 파라미터 설정
-
-iters_num = 1                   #반복횟수
 iters_num = 2                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
 batch_size = 10                 #미니배치 크기 100
@@ -42,11 +38,18 @@ for i in range(iters_num):
     t_batch = t_train[batch_mask]   #(10000,10)
     
     #기울기 계산
-    grad = network.gradient(x_batch, t_batch)
+    grad_numerical = network.numerical(x_batch, t_batch)
+    grad_backprop = network.gradient(x_batch, t_batch)
     
+    #가중치의 차이의 절대값 즉 즉미분과 역전파의 오차
+    for key in grad_numerical.keys():
+        diff = np.average( np.abs(grad_backprop[key] - grad_numerical[key]) )
+        print(key = ":" + str(diff))
+        
     #매개변수 갱신
     for key in ('W1','b1','W2','b2'):
-        network.params[key] -= learning_rate * grad[key]
+        network.params[key] -= learning_rate * grad_numerical[key]
+        network.params[key] -= learning_rate * grad_gradient[key]
         
     #학습 경과 기록
     loss = network.loss(x_batch, t_batch)
