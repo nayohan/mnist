@@ -1,4 +1,3 @@
-
 #URL의 파일다운
 import urllib.request
 mnist_url = "https://raw.githubusercontent.com/WegraLee/deep-learning-from-scratch/master/dataset/mnist.py"
@@ -21,8 +20,6 @@ from LayerNet import TwoLayerNet
 network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)   #클래스객체생성
 
 #3.하이퍼 파라미터 설정
-
-iters_num = 1                   #반복횟수
 iters_num = 2                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
 batch_size = 10                 #미니배치 크기 100

@@ -1,4 +1,4 @@
-"""
+
 #URL의 파일다운
 import urllib.request
 mnist_url = "https://raw.githubusercontent.com/WegraLee/deep-learning-from-scratch/master/dataset/mnist.py"
@@ -6,7 +6,7 @@ a=urllib.request.urlopen(mnist_url)
 k=open("mnist.py","wb")
 k.write(a.read())
 k.close()
-"""
+
 
 #시간 확인 
 import time   
