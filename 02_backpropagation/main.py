@@ -1,3 +1,4 @@
+"""
 #URL의 파일다운
 import urllib.request
 mnist_url = "https://raw.githubusercontent.com/WegraLee/deep-learning-from-scratch/master/dataset/mnist.py"
@@ -5,7 +6,7 @@ a=urllib.request.urlopen(mnist_url)
 k=open("mnist.py","wb")
 k.write(a.read())
 k.close()
-
+"""
 #시간 확인 
 import time   
 start_time = time.time() 
@@ -22,7 +23,7 @@ network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)   #클래�
 #3.하이퍼 파라미터 설정
 iters_num = 2                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
-batch_size = 10                 #미니배치 크기 100
+batch_size = 100                #미니배치 크기 100
 learning_rate = 0.1             #학습률
 
 #경과기록
@@ -38,19 +39,12 @@ for i in range(iters_num):
     t_batch = t_train[batch_mask]   #(10000,10)
     
     #기울기 계산
-    grad_numerical = network.numerical(x_batch, t_batch)
     grad_backprop = network.gradient(x_batch, t_batch)
     
-    #가중치의 차이의 절대값 즉 즉미분과 역전파의 오차
-    for key in grad_numerical.keys():
-        diff = np.average( np.abs(grad_backprop[key] - grad_numerical[key]) )
-        print(key = ":" + str(diff))
-        
     #매개변수 갱신
     for key in ('W1','b1','W2','b2'):
-        network.params[key] -= learning_rate * grad_numerical[key]
-        network.params[key] -= learning_rate * grad_gradient[key]
-        
+        network.params[key] -= learning_rate * grad_backprop[key]
+      
     #학습 경과 기록
     loss = network.loss(x_batch, t_batch)
     train_acc = network.accuracy(x_train, t_train)
@@ -59,17 +53,23 @@ for i in range(iters_num):
     train_loss_list.append(loss) #리스트에 요소 추가
     train_acc_list.append(train_acc)
     test_acc_list.append(test_acc)
-    
-    print(str(i+1) + " loss : "+str(train_loss_list[i]/batch_size))
-    print(str(i+1) +"train acc : " + str(train_acc))
-    print(str(i+1) +"test acc : " + str(test_acc))
+
+    print(str(i+1) + " loss      : " + str(round((train_loss_list[i]/batch_size),2)))
+    print(str(i+1) + " train acc : " + str(round(train_acc,2)))
+    print(str(i+1) + " test acc  : " + str(round(test_acc,2)))
     
     #1회 학습에 걸린시간
     mid_time = time.time()
     one = mid_time - tmp_time
-    print(str(i+1) + " time : " + str(int(one)) + "초")
+    print(str(i+1) + " time      : " + str(round(one,2)) + "초")
+    print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
     tmp_time = mid_time    
+
     
+#print(" loss      : " + str(round((train_loss_list/batch_size),2)))
+print(" train acc : " + str(round(train_acc,2)))
+print(" test acc  : " + str(round(test_acc,2)))
+
 #5.총 걸린시간    
 end_time = time.time()
 print("Running time : " + str(int(end_time-start_time)) + "초")    

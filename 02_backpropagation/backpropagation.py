@@ -1,4 +1,6 @@
 import numpy as np
+from functions import softmax
+from functions import cross_entropy_error
 
 class Sigmoid:
     def __init__(self):
@@ -28,7 +30,13 @@ class Affine:
         return out
         
     def backward(self, dout):
-        dx = np.dot(dout, self.x.T, dout)
+        #print(dout.shape)
+        #print(self.W.shape)
+        #print(self.W.T.shape)
+        #print(self.x.T.shape)        
+        dx = np.dot(dout, self.W.T)
+
+        self.dw = np.dot(self.x.T, dout)
         self.db = np.sum(dout, axis=0)
         return dx
     
