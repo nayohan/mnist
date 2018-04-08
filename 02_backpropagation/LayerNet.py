@@ -26,11 +26,12 @@ class TwoLayerNet:
         f.write(str(self.params['b2']))
         f.close()
         """
-        
+        https://wikidocs.net/33#pickle
+      
            
         #가중치값 불러오기기
         f = open("/projects/mnist_cnn/02_backpropagation/y_w1.txt", 'r')
-        self.params['W1'] = np.asarray(f.read().split())
+        self.params['W1'] = np.asarray(f.readlines())
         f.close()
         f = open("/projects/mnist_cnn/02_backpropagation/y_b1.txt", 'r')
         self.params['b1'] = np.asarray(f.read().split())
@@ -43,6 +44,7 @@ class TwoLayerNet:
         f.close()
         
         print(self.params['W1'].shape)
+        print(self.params['W1'])
         print(self.params['b1'].shape)
         print(self.params['W2'].shape)
         print(self.params['b2'].shape)        
