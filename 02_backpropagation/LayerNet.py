@@ -43,7 +43,6 @@ class TwoLayerNet:
         self.params['b2'] = pickle.load(f)
         f.close()
         
-        
         #print(self.params['W1'].shape)
         #print(self.params['W1'])
         #print(self.params['b1'].shape)
@@ -56,9 +55,7 @@ class TwoLayerNet:
         self.layers['Relu1'] = Sigmoid()
         self.layers['Affine2'] = Affine(self.params['W2'], self.params['b2'])
         self.lastLayer = SoftmaxWithLoss()
-        
-   
-        
+
     def predict(self, x):       #(100,784)                                              #이미지 예측 
         for layer in self.layers.values():
             x = layer.forward(x)

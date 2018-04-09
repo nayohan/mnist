@@ -2,6 +2,13 @@ import numpy as np
 from functions import softmax
 from functions import cross_entropy_error
 
+class Relu:
+    def __init_(self):
+        self.mask = None
+    
+    def forward(self, x):
+        self.mask = (x < =>)
+
 class Sigmoid:
     def __init__(self):
         self.out = None
