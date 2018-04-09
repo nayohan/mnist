@@ -7,27 +7,27 @@ import pickle
 class TwoLayerNet:
     def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):     #초기 파라미터값 설정
         self.params = {}
-        """
-        #가중치 초기값 생성시 작동할
-        self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)  #(784,50)
-        self.params['b1'] = np.zeros(hidden_size)                                       #(50,)
-        self.params['W2'] = weight_init_std * np.random.randn(hidden_size,output_size)  #(50,10)
-        self.params['b2'] = np.zeros(output_size)
-                                      #(10,)
-        #가중치 값 저장하기
-        f = open("/projects/mnist_cnn/02_backpropagation/y_w1.txt", 'wb')
-        pickle.dump(self.params['W1'], f)
-        f.close()
-        f = open("/projects/mnist_cnn/02_backpropagation/y_b1.txt", 'wb')
-        pickle.dump(self.params['b1'], f)
-        f.close()
-        f = open("/projects/mnist_cnn/02_backpropagation/y_w2.txt", 'wb')
-        pickle.dump(self.params['W2'], f)
-        f.close()
-        f = open("/projects/mnist_cnn/02_backpropagation/y_b2.txt", 'wb')
-        pickle.dump(self.params['b2'], f)
-        f.close()
-        """
+        if 0:
+            #가중치 초기값 생성시 작동할부분
+            self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)  #(784,50)
+            self.params['b1'] = np.zeros(hidden_size)                                       #(50,)
+            self.params['W2'] = weight_init_std * np.random.randn(hidden_size,output_size)  #(50,10)
+            self.params['b2'] = np.zeros(output_size)
+                                          #(10,)
+            #가중치 값 저장하기
+            f = open("/projects/mnist_cnn/02_backpropagation/y_w1.txt", 'wb')
+            pickle.dump(self.params['W1'], f)
+            f.close()
+            f = open("/projects/mnist_cnn/02_backpropagation/y_b1.txt", 'wb')
+            pickle.dump(self.params['b1'], f)
+            f.close()
+            f = open("/projects/mnist_cnn/02_backpropagation/y_w2.txt", 'wb')
+            pickle.dump(self.params['W2'], f)
+            f.close()
+            f = open("/projects/mnist_cnn/02_backpropagation/y_b2.txt", 'wb')
+            pickle.dump(self.params['b2'], f)
+            f.close()
+        
         
         #가중치 값 불러오기기
         f = open("/projects/mnist_cnn/02_backpropagation/y_w1.txt", 'rb')
@@ -42,17 +42,11 @@ class TwoLayerNet:
         f = open("/projects/mnist_cnn/02_backpropagation/y_b2.txt", 'rb')
         self.params['b2'] = pickle.load(f)
         f.close()
-        
-        #print(self.params['W1'].shape)
-        #print(self.params['W1'])
-        #print(self.params['b1'].shape)
-        #print(self.params['W2'].shape)
-        #print(self.params['b2'].shape)    
-        
+
         #계층생성
         self.layers = OrderedDict()
         self.layers['Affine1'] = Affine(self.params['W1'], self.params['b1'])
-        self.layers['Relu1'] = Sigmoid()
+        self.layers['Relu1'] = Relu()
         self.layers['Affine2'] = Affine(self.params['W2'], self.params['b2'])
         self.lastLayer = SoftmaxWithLoss()
 

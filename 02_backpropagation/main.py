@@ -21,7 +21,7 @@ from LayerNet import TwoLayerNet
 network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)   #클래스객체생성
 
 #3.하이퍼 파라미터 설정
-iters_num = 40                   #반복횟수
+iters_num = 2                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
 batch_size = 1000                #미니배치 크기 100
 learning_rate = 0.1             #학습률
@@ -80,10 +80,27 @@ f = open("/projects/mnist_cnn/02_backpropagation/y_b2.txt", 'wb')
 pickle.dump(network.params['b2'], f)
 f.close()
 
-    
+"""
+# 그래프 그리기
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
+import matplotlib.pylab as plt
+
+markers = {'train': 'o', 'test': 's'}
+x = np.arange(len(train_acc_list))
+plt.plot(x, train_acc_list, label='train acc')
+plt.plot(x, test_acc_list, label='test acc', linestyle='--')
+plt.xlabel("epochs")
+plt.ylabel("accuracy")
+plt.ylim(0, 1.0)
+plt.legend(loc='lower right')
+plt.show()
+"""    
+
 #print(" loss      : " + str(round((train_loss_list/batch_size),2)))
-print(" train acc : " + str(round(train_acc,2)))
-print(" test acc  : " + str(round(test_acc,2)))
+print(" train acc : " + str(round(train_acc,3)))
+print(" test acc  : " + str(round(test_acc,3)))
 
 #5.총 걸린시간    
 end_time = time.time()
