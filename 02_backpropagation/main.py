@@ -23,25 +23,24 @@ network = TwoLayerNet(input_size=784, hidden_size=200, output_size=10)   #클래
 #3.하이퍼 파라미터 설정
 iters_num = 2                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
-batch_size = 100                 #미니배치 크기 100
+batch_size = 10000                 #미니배치 크기 100
 learning_rate = 0.1             #학습률
 
 #경과기록
 train_loss_list = []  
 train_acc_list = []
 test_acc_list = []
-print("hi")
+
 
 #4.학습 시작
 import numpy as np
 for i in range(iters_num):
     batch_mask = np.random.choice(train_size, batch_size) #(100,)
-    x_batch = x_train[:1]   #(10000,784)
-    t_batch = t_train[:1]   #(10000,10)
+    x_batch = x_train[batch_mask]   #(10000,784)
+    t_batch = t_train[batch_mask]   #(10000,10)
     
     #기울기 계산
     grad_backprop = network.gradient(x_batch, t_batch)
-    print('hello')
 
     #매개변수 갱신
     for key in ('W1','b1','W2','b2'):

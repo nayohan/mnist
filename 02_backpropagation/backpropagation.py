@@ -44,11 +44,7 @@ class Affine:
         out = np.dot(x,self.W) + self.b
         return out
         
-    def backward(self, dout):
-        #print(dout.shape)
-        #print(self.W.shape)
-        #print(self.W.T.shape)
-        #print(self.x.T.shape)        
+    def backward(self, dout):     
         dx = np.dot(dout, self.W.T)
 
         self.dw = np.dot(self.x.T, dout)
