@@ -18,10 +18,10 @@ from mnist import load_mnist
 
 #2.클래스 불러오기
 from LayerNet import TwoLayerNet
-network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)   #클래스객체생성
+network = TwoLayerNet(input_size=784, hidden_size=200, output_size=10)   #클래스객체생성
 
 #3.하이퍼 파라미터 설정
-iters_num = 2                   #반복횟수
+iters_num = 20                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
 batch_size = 1000                #미니배치 크기 100
 learning_rate = 0.1             #학습률
@@ -53,10 +53,10 @@ for i in range(iters_num):
     train_loss_list.append(loss) #리스트에 요소 추가
     train_acc_list.append(train_acc)
     test_acc_list.append(test_acc)
-
+    
     print(str(i+1) + " loss      : " + str(round((train_loss_list[i]/batch_size),2)))
-    print(str(i+1) + " train acc : " + str(round(train_acc,2)))
-    print(str(i+1) + " test acc  : " + str(round(test_acc,2)))
+    print(str(i+1) + " train acc : " + str(round(train_acc,4)))
+    print(str(i+1) + " test acc  : " + str(round(test_acc,4)))
     
     #1회 학습에 걸린시간
     mid_time = time.time()
@@ -96,11 +96,7 @@ plt.ylabel("accuracy")
 plt.ylim(0, 1.0)
 plt.legend(loc='lower right')
 plt.show()
-"""    
-
-#print(" loss      : " + str(round((train_loss_list/batch_size),2)))
-print(" train acc : " + str(round(train_acc,3)))
-print(" test acc  : " + str(round(test_acc,3)))
+"""  
 
 #5.총 걸린시간    
 end_time = time.time()
