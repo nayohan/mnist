@@ -11,7 +11,7 @@ weight_url = "https://raw.githubusercontent.com/WegraLee/deep-learning-from-scra
 a = urllib.request.urlopen(mnist_url)	#변수a에 파일저장
 b = urllib.request.urlopen(weight_url)	#변수b에 파일저장
 
-os.chdir('/home/sorna')			#파일경로 /home/sorna로 변경
+os.chdir('/projects/mnist_cnn/00_neural_network')			#파일경로 /home/sorna로 변경
 k = open("mnist.py","wb")		#mnist.py 파일 생성 (같은 위치에 저장)
 k.write(a.read())				#파일 쓰기
 k.close()						#파일 닫기
@@ -39,7 +39,6 @@ def get_data():					#load_mnist함수를 이용해서 훈련,시험데이터 저
   return x_test, t_test
   
 def init_network():				#sample_weight파일에서 학습된 가중치 파일 network변수로로딩
-  os.chdir('/home/sorna')
   with open("sample_weight.pkl",'rb') as sample_w:
     network = pickle.load(sample_w)
     print(network)
