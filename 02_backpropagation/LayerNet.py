@@ -7,7 +7,7 @@ import pickle
 class TwoLayerNet:
     def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):     #초기 파라미터값 설정
         self.params = {}
-        if 0:
+        if 1:
             #가중치 초기값 생성시 작동할부분
             self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)  #(784,50)
             self.params['b1'] = np.zeros(hidden_size)                                       #(50,)

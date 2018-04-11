@@ -21,10 +21,10 @@ from LayerNet import TwoLayerNet
 network = TwoLayerNet(input_size=784, hidden_size=200, output_size=10)   #클래스객체생성
 
 #3.하이퍼 파라미터 설정
-iters_num = 2                   #반복횟수
+iters_num =  10                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
-batch_size = 10000                 #미니배치 크기 100
-learning_rate = 0.1             #학습률
+batch_size = 100                 #미니배치 크기 100
+learning_rate = 0.01             #학습률
 
 #경과기록
 train_loss_list = []  
@@ -45,6 +45,7 @@ for i in range(iters_num):
     #매개변수 갱신
     for key in ('W1','b1','W2','b2'):
         network.params[key] -= learning_rate * grad_backprop[key]
+        print(grad_backprop[key])
     
     #학습 경과 기록
     loss = network.loss(x_batch, t_batch)
@@ -55,7 +56,7 @@ for i in range(iters_num):
     train_acc_list.append(train_acc)
     test_acc_list.append(test_acc)
     
-    print(str(i+1) + " loss      : " + str(round((train_loss_list[i]/batch_size),2)))
+    print(str(i+1) + " loss      : " + str(round((train_loss_list[i]/batch_size),4)))
     print(str(i+1) + " train acc : " + str(round(train_acc,4)))
     print(str(i+1) + " test acc  : " + str(round(test_acc,4)))
     
