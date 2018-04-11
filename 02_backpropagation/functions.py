@@ -3,7 +3,18 @@ import numpy as np
 #시그모이드 함수
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
-    
+"""   
+def softmax(a):
+    c = np.max(a)
+    exp_a = np.exp(a-c)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a / sum_exp_a
+    return y
+"""    
+def cross_entropy_error(y, t):
+    delta = 1e-8
+    return -np.sum( t * np.log(y + delta))
+  
 #소프트맥스 함수
 def softmax(x):
     if x.ndim == 2:
@@ -13,7 +24,7 @@ def softmax(x):
         return y.T
     x = x - np.max(x) # 오버플로 대책
     return np.exp(x) / np.sum(np.exp(x))
-    
+"""
 def cross_entropy_error(y, t):
     if y.ndim == 1:
         t = t.reshape(1, t.size)
@@ -25,7 +36,7 @@ def cross_entropy_error(y, t):
              
     batch_size = y.shape[0]
     return -np.sum(np.log(y[np.arange(batch_size), t] + 1e-7)) / batch_size
-
+"""    
 #미분 ??
 def numerical_gradient(f, x):
     h = 1e-4 #0.0001
