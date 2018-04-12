@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 from collections import OrderedDict
 import os
+from optimizer import *
 
 #---------------------------------------------------------------------------------
 #functions.py
@@ -147,31 +148,14 @@ class TwoLayerNet:
             self.params['b2'] = np.zeros(output_size)
 
             #가중치 값 저장하기
-            f = open("/projects/mnist_cnn/03_optimizer/y_w1.txt", 'wb')
-            pickle.dump(self.params['W1'], f)
+            f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'wb')
+            pickle.dump(self.params, f)
             f.close()
-            f = open("/projects/mnist_cnn/03_optimizer/y_b1.txt", 'wb')
-            pickle.dump(self.params['b1'], f)
-            f.close()
-            f = open("/projects/mnist_cnn/03_optimizer/y_w2.txt", 'wb')
-            pickle.dump(self.params['W2'], f)
-            f.close()
-            f = open("/projects/mnist_cnn/03_optimizer/y_b2.txt", 'wb')
-            pickle.dump(self.params['b2'], f)
-            f.close()
-             
+           
+  
         #가중치 값 불러오기기
-        f = open("/projects/mnist_cnn/03_optimizer/y_w1.txt", 'rb')
-        self.params['W1'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/03_optimizer/y_b1.txt", 'rb')
-        self.params['b1'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/03_optimizer/y_w2.txt", 'rb')
-        self.params['W2'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/03_optimizer/y_b2.txt", 'rb')
-        self.params['b2'] = pickle.load(f)
+        f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'rb')
+        self.params = pickle.load(f)
         f.close()
 
         #계층생성
@@ -235,6 +219,7 @@ tmp_time = start_time
 
 #2.클래스 불러오기
 network = TwoLayerNet(input_size=784, hidden_size=200, output_size=10)   #클래스객체생성
+optimizer = AdaGrad()
 
 #3.하이퍼 파라미터 설정
 iters_num =  60                   #반복횟수
@@ -254,13 +239,16 @@ for i in range(iters_num):
     t_batch = t_train[batch_mask]   #(10000,10)
     
     #기울기 계산
-    grad_backprop = network.gradient(x_batch, t_batch)
-
+    grads = network.gradient(x_batch, t_batch)
+    params = network.params
+    optimizer.update(params, grads)
+    
+    """
     #매개변수 갱신
     for key in ('W1','b1','W2','b2'):
         network.params[key] -= learning_rate * grad_backprop[key]
         #print(grad_backprop[key]) #Eureka!
-    
+    """
     #학습 경과 기록
     loss = network.loss(x_batch, t_batch)
     train_acc = network.accuracy(x_train, t_train)
@@ -282,17 +270,8 @@ for i in range(iters_num):
     tmp_time = mid_time    
 
 #가중치 값 저장하기
-f = open("/projects/mnist_cnn/03_optimizer/y_w1.txt", 'wb')
-pickle.dump(network.params['W1'], f)
-f.close()
-f = open("/projects/mnist_cnn/03_optimizer/y_b1.txt", 'wb')
-pickle.dump(network.params['b1'], f)
-f.close()
-f = open("/projects/mnist_cnn/03_optimizer/y_w2.txt", 'wb')
-pickle.dump(network.params['W2'], f)
-f.close()
-f = open("/projects/mnist_cnn/03_optimizer/y_b2.txt", 'wb')
-pickle.dump(network.params['b2'], f)
+f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'wb')
+pickle.dump(network.params, f)
 f.close()
 
 #5.총 걸린시간    
