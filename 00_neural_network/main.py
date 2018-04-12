@@ -69,6 +69,7 @@ for i in range(len(x)):			#x는 10000개
   if p == t[i]:					#정답과 비교
     accuracy_cnt += 1			#맞으면 +1
     
+"""    #eclipse che에서 구동 불가
 import matplotlib.pyplot as plt
 from matplotlib.image import imread
 
@@ -78,6 +79,6 @@ for i in [1,2,3]:
 	plt.imshow(img)
 	plt.show()
 	print(t[i])
-   
+"""   
 
-print("Accuracy:" + str(float(accuracy_cnt) /len(x)))	#정확도 출력 0.9207
+print("Accuracy:" + str(float(accuracy_cnt) /len(x) * 100 ) + "%")	#정확도 출력 0.9207

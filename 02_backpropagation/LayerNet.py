@@ -7,7 +7,7 @@ import pickle
 class TwoLayerNet:
     def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):     #초기 파라미터값 설정
         self.params = {}
-        if 0:
+        if 1:
             #가중치 초기값 생성시 작동할부분
             self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)  #(784,50)
             self.params['b1'] = np.zeros(hidden_size)                                       #(50,)
@@ -15,32 +15,14 @@ class TwoLayerNet:
             self.params['b2'] = np.zeros(output_size)
                                           #(10,)
             #가중치 값 저장하기
-            f = open("/projects/mnist_cnn/02_backpropagation/y_w1.txt", 'wb')
-            pickle.dump(self.params['W1'], f)
+            f = open("/projects/mnist_cnn/02_backpropagation/weight.pkl", 'wb')
+            pickle.dump(self.params, f)
             f.close()
-            f = open("/projects/mnist_cnn/02_backpropagation/y_b1.txt", 'wb')
-            pickle.dump(self.params['b1'], f)
-            f.close()
-            f = open("/projects/mnist_cnn/02_backpropagation/y_w2.txt", 'wb')
-            pickle.dump(self.params['W2'], f)
-            f.close()
-            f = open("/projects/mnist_cnn/02_backpropagation/y_b2.txt", 'wb')
-            pickle.dump(self.params['b2'], f)
-            f.close()
-        
-        
+           
+  
         #가중치 값 불러오기기
-        f = open("/projects/mnist_cnn/02_backpropagation/y_w1.txt", 'rb')
-        self.params['W1'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/02_backpropagation/y_b1.txt", 'rb')
-        self.params['b1'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/02_backpropagation/y_w2.txt", 'rb')
-        self.params['W2'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/02_backpropagation/y_b2.txt", 'rb')
-        self.params['b2'] = pickle.load(f)
+        f = open("/projects/mnist_cnn/02_backpropagation/weight.pkl", 'rb')
+        self.params = pickle.load(f)
         f.close()
 
         #계층생성

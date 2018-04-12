@@ -1,12 +1,13 @@
-"""
 #초기 mnist.pyURL의 파일다운
 import urllib.request
 mnist_url = "https://raw.githubusercontent.com/WegraLee/deep-learning-from-scratch/master/dataset/mnist.py"
 a=urllib.request.urlopen(mnist_url)
+import os
+os.chdir('/projects/mnist_cnn/02_backpropagation')
 k=open("mnist.py","wb")
 k.write(a.read())
 k.close()
-"""
+
 #시간 확인 
 import time   
 start_time = time.time() 
@@ -21,7 +22,7 @@ from LayerNet import TwoLayerNet
 network = TwoLayerNet(input_size=784, hidden_size=200, output_size=10)   #클래스객체생성
 
 #3.하이퍼 파라미터 설정
-iters_num =  10                   #반복횟수
+iters_num =  60                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
 batch_size = 1000                 #미니배치 크기 100
 learning_rate = 0.001             #학습률
@@ -69,17 +70,8 @@ for i in range(iters_num):
 
 #가중치 값 저장하기
 import pickle
-f = open("/projects/mnist_cnn/02_backpropagation/y_w1.txt", 'wb')
-pickle.dump(network.params['W1'], f)
-f.close()
-f = open("/projects/mnist_cnn/02_backpropagation/y_b1.txt", 'wb')
-pickle.dump(network.params['b1'], f)
-f.close()
-f = open("/projects/mnist_cnn/02_backpropagation/y_w2.txt", 'wb')
-pickle.dump(network.params['W2'], f)
-f.close()
-f = open("/projects/mnist_cnn/02_backpropagation/y_b2.txt", 'wb')
-pickle.dump(network.params['b2'], f)
+f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'wb')
+pickle.dump(network.params, f)
 f.close()
 
 """
