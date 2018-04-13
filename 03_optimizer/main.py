@@ -147,31 +147,14 @@ class TwoLayerNet:
             self.params['b2'] = np.zeros(output_size)
 
             #가중치 값 저장하기
-            f = open("/projects/mnist_cnn/03_optimizer/y_w1.txt", 'wb')
-            pickle.dump(self.params['W1'], f)
+            f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'wb')
+            pickle.dump(self.params, f)
             f.close()
-            f = open("/projects/mnist_cnn/03_optimizer/y_b1.txt", 'wb')
-            pickle.dump(self.params['b1'], f)
-            f.close()
-            f = open("/projects/mnist_cnn/03_optimizer/y_w2.txt", 'wb')
-            pickle.dump(self.params['W2'], f)
-            f.close()
-            f = open("/projects/mnist_cnn/03_optimizer/y_b2.txt", 'wb')
-            pickle.dump(self.params['b2'], f)
-            f.close()
-             
+           
+  
         #가중치 값 불러오기기
-        f = open("/projects/mnist_cnn/03_optimizer/y_w1.txt", 'rb')
-        self.params['W1'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/03_optimizer/y_b1.txt", 'rb')
-        self.params['b1'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/03_optimizer/y_w2.txt", 'rb')
-        self.params['W2'] = pickle.load(f)
-        f.close()
-        f = open("/projects/mnist_cnn/03_optimizer/y_b2.txt", 'rb')
-        self.params['b2'] = pickle.load(f)
+        f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'rb')
+        self.params = pickle.load(f)
         f.close()
 
         #계층생성
@@ -282,17 +265,8 @@ for i in range(iters_num):
     tmp_time = mid_time    
 
 #가중치 값 저장하기
-f = open("/projects/mnist_cnn/03_optimizer/y_w1.txt", 'wb')
-pickle.dump(network.params['W1'], f)
-f.close()
-f = open("/projects/mnist_cnn/03_optimizer/y_b1.txt", 'wb')
-pickle.dump(network.params['b1'], f)
-f.close()
-f = open("/projects/mnist_cnn/03_optimizer/y_w2.txt", 'wb')
-pickle.dump(network.params['W2'], f)
-f.close()
-f = open("/projects/mnist_cnn/03_optimizer/y_b2.txt", 'wb')
-pickle.dump(network.params['b2'], f)
+f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'wb')
+pickle.dump(network.params, f)
 f.close()
 
 #5.총 걸린시간    
