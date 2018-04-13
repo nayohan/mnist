@@ -218,7 +218,7 @@ tmp_time = start_time
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, normalize=False,  one_hot_label=True) #(60000,784)(60000,10)(10000,784)(10000,10)
 
 #3.하이퍼 파라미터 설정
-iters_num =  60                   #반복횟수
+iters_num =  2                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
 batch_size = 1000                 #미니배치 크기 100
 learning_rate = 0.001             #학습률
@@ -274,11 +274,13 @@ for i in range(iters_num):
         train_acc_list[key].append(round(train_acc,2))
         test_acc_list[key].append(round(test_acc,2))
         
-        """
-        train_loss_list[key] = list(map(int, train_loss_list[key])) #리스트내용을 int로 변환
-        train_acc_list[key] = list(map(int, train_acc_list[key]))
-        test_acc_list[key] = list(map(int, test_acc_list[key]))      
+ 
+        train_loss_list[key] = list(map(int, train_loss_list[key])) #리스트내용을 int로 변환     
         
+        train_loss_list[key][i] = round((train_loss_list[key][i] / batch_size),3)
+        train_acc_list[key][i] = round(train_acc_list[key][i] ,3)
+        test_acc_list[key][i] = round(test_acc_list[key][i] ,3)
+        """
         print(str(i+1) + " loss      : " + str(round((train_loss_list[key][i] / batch_size),4)))
         print(str(i+1) + " train acc : " + str(round(train_acc,4)))
         print(str(i+1) + " test acc  : " + str(round(test_acc,4)))
@@ -293,8 +295,9 @@ for i in range(iters_num):
         
 for key in optimizers.keys():
     print(key)
-    print(train_loss_list[key])
-    print(train_acc_list[key])
+    print(" loss      : " + str(train_loss_list[key]))
+    print(" train acc : " + str(train_acc_list[key]))
+    print(" train acc : " + str(test_acc_list[key]))
     
     #가중치 값 저장하기
     f = open("/projects/mnist_cnn/03_optimizer/weight_" + key + ".pkl", 'wb')
