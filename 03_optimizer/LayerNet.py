@@ -8,7 +8,7 @@ class TwoLayerNet:
   	#초기 파라미터값 설정
     def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):     
         self.params = {}
-        if 1:
+        if 0:
             #가중치 초기값 생성시 작동할부분
             """
             #가우시안 표준 정규 분포
@@ -37,7 +37,7 @@ class TwoLayerNet:
            
   
         #가중치 값 불러오기기
-        f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'rb')
+        f = open("/projects/mnist_cnn/03_optimizer/weight_Adam.pkl", 'rb')
         self.params = pickle.load(f)
         f.close()
 
