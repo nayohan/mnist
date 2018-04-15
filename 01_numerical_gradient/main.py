@@ -1,13 +1,97 @@
-#URL의 파일다운
 import urllib.request
+import time   
+import numpy as np
+import pickle
+import os
+
+#---------------------------------------------------------------------------------
+#functions.py
+#시그모이드 함수
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+    
+#소프트맥스 함수
+def softmax(a):
+    c = np.max(a)
+    exp_a = np.exp(a - c)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a / sum_exp_a
+    return y
+    
+#교차 엔트로피 에러
+def cross_entropy_error(y,t):
+    delta = 1e-7 #0.0000001
+    return -np.sum(t * np.log(y + delta))
+
+#미분
+def numerical_gradient(f, x):
+    h = 1e-4 #0.0001
+    grad = np.zeros_like(x)
+    
+    it = np.nditer(x, flags=['multi_index'], op_flags=['readwrite'])
+    while not it.finished:
+        idx = it.multi_index
+        tmp_val = x[idx]
+        x[idx] = float(tmp_val) + h
+        fxh1 = f(x) # f(x+h)
+        
+        x[idx] = tmp_val - h 
+        fxh2 = f(x) # f(x-h)
+        grad[idx] = (fxh1 - fxh2) / (2*h)
+        
+        x[idx] = tmp_val # 값 복원
+        it.iternext()   
+    return grad
+
+#---------------------------------------------------------------------------------
+#LayerNet.py
+class TwoLayerNet:
+    def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):     #초기 파라미터값 설정
+        self.params = {}
+        self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)  #(784,50)
+        self.params['b1'] = np.zeros(hidden_size)                                       #(50,)
+        self.params['W2'] = weight_init_std * np.random.randn(hidden_size,output_size)  #(50,10)
+        self.params['b2'] = np.zeros(output_size)                                       #(10,)
+    
+    def predict(self, x):       #(100,784)                                              #이미지 예측 
+        W1,W2 = self.params['W1'], self.params['W2']                 
+        b1,b2 = self.params['b1'], self.params['b2']                                    #활성화 함수
+        a1 = np.dot(x, W1) + b1                                                         #A = XW + B    
+        z1 = sigmoid(a1)                                                                #sigmoid()
+        a2 = np.dot(z1, W2) + b2
+        y = softmax(a2)
+        return y                #(100,10)
+    
+    def loss(self,x,t):         #(100,784)(100,10)
+        y = self.predict(x)
+        return cross_entropy_error(y,t)
+        
+    def accuracy(self,x,t):
+        y = self.predict(x)
+        y = np.argmax(y, axis=1)
+        t = np.argmax(t, axis=1)
+        accuracy = np.sum(y == t) / float(x.shape[0])
+        return accuracy
+    
+    def gradient(self,x,t):     #(100,784)(100,10)
+        loss_W = lambda W: self.loss(x,t)
+        grads = {}
+        grads['W1'] = numerical_gradient(loss_W, self.params['W1']) #(784,50)
+        grads['b1'] = numerical_gradient(loss_W, self.params['b1']) #(50,)
+        grads['W2'] = numerical_gradient(loss_W, self.params['W2']) #(50,10)
+        grads['b2'] = numerical_gradient(loss_W, self.params['b2']) #(10,)     
+        return grads
+#---------------------------------------------------------------------------------
+#main.py
+#URL의 파일다운
 mnist_url = "https://raw.githubusercontent.com/WegraLee/deep-learning-from-scratch/master/dataset/mnist.py"
 a=urllib.request.urlopen(mnist_url)
+os.chdir('mnist_c/mnist_cnn/01_numerical_gradient')
 k=open("mnist.py","wb")
 k.write(a.read())
 k.close()
 
 #시간 확인 
-import time   
 start_time = time.time() 
 tmp_time = start_time
 
@@ -16,7 +100,6 @@ from mnist import load_mnist
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, normalize=False,  one_hot_label=True) #(60000,784)(60000,10)(10000,784)(10000,10)
 
 #2.클래스 불러오기
-from LayerNet import TwoLayerNet
 network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)   #클래스객체생성
 
 #3.하이퍼 파라미터 설정
@@ -31,7 +114,6 @@ train_acc_list = []
 test_acc_list = []
 
 #4.학습 시작
-import numpy as np
 for i in range(iters_num):
     batch_mask = np.random.choice(train_size, batch_size) #(100,)
     x_batch = x_train[batch_mask]   #(10000,784)
