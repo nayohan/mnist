@@ -4,6 +4,9 @@ import numpy as np
 import pickle
 from collections import OrderedDict
 import os
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 
 #---------------------------------------------------------------------------------
 #functions.py
