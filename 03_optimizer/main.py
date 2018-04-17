@@ -64,14 +64,7 @@ for i in range(iters_num):
     #기울기 계산
     for key in optimizers.keys():
         grads = networks[key].gradient(x_batch, t_batch)
-        params = networks[key].params
-        optimizers[key].update(params, grads)
-        
-        """
-        #매개변수 갱신
-        for key in ('W1','b1','W2','b2'):
-            network.params[key] -= learning_rate * grad_backprop[key]
-            #print(grad_backprop[key]) #Eureka!
+        optimizers[key].update(networks[key].params, grads)
         """
         #학습 경과 기록
         loss = networks[key].loss(x_batch, t_batch)
@@ -89,17 +82,14 @@ for i in range(iters_num):
         train_acc_list[key][i] = round(train_acc_list[key][i] ,4)
         test_acc_list[key][i] = round(test_acc_list[key][i] ,4)
         """
-        print(str(i+1) + " loss      : " + str(round((train_loss_list[key][i] / batch_size),4)))
-        print(str(i+1) + " train acc : " + str(round(train_acc,4)))
-        print(str(i+1) + " test acc  : " + str(round(test_acc,4)))
-        
-        #1회 학습에 걸린시간
-        mid_time = time.time()
-        one = mid_time - tmp_time
-        print(str(i+1) + " time      : " + str(round(one,2)) + "초")
-        print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-        tmp_time = mid_time    
-        """    
+        loss = networks[key].loss(x_batch, t_batch)
+        train_loss[key].append(loss)
+    
+    if i % 100 == 0:
+        print( "===========" + "iteration:" + str(i) + "===========")
+        for key in optimizers.keys():
+            loss = networks[key].loss(x_batch, t_batch)
+            print(key + ":" + str(loss))
 
 for key in optimizers.keys():
     print(key)

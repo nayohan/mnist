@@ -31,7 +31,7 @@ class TwoLayerNet:
             
 
             #가중치 값 저장하기
-            f = open("/projects/mnist_cnn/03_optimizer/weight.pkl", 'wb')
+            f = open("/projects/mnist_cnn/03_optimizer/weight_Adam.pkl", 'wb')
             pickle.dump(self.params, f)
             f.close()
            
