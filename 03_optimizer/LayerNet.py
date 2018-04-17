@@ -8,7 +8,7 @@ class TwoLayerNet:
   	#초기 파라미터값 설정
     def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):     
         self.params = {}
-        if 0:
+        if 1:
             #가중치 초기값 생성시 작동할부분
             """
             #가우시안 표준 정규 분포
@@ -28,18 +28,26 @@ class TwoLayerNet:
             self.params['b1'] = np.zeros(hidden_size)                                     
             self.params['W2'] = weight_init_std * np.random.randn(hidden_size,output_size) / np.sqrt(input_size/2) 
             self.params['b2'] = np.zeros(output_size)
-            
-
-            #가중치 값 저장하기
-            f = open("/projects/mnist_cnn/03_optimizer/weight_Adam.pkl", 'wb')
-            pickle.dump(self.params, f)
-            f.close()
-           
-  
+               
+        """
         #가중치 값 불러오기기
-        f = open("/projects/mnist_cnn/03_optimizer/weight_Adam.pkl", 'rb')
-        self.params = pickle.load(f)
+        f = open("/projects/mnist_cnn/03_optimizer/weight_SGD.pkl", 'rb')
+        self['SGD'].params = pickle.load(f)
         f.close()
+        
+        f = open("/projects/mnist_cnn/03_optimizer/weight_Momentum.pkl", 'rb')
+        self['Momentum'].params = pickle.load(f)
+        f.close()
+        
+        f = open("/projects/mnist_cnn/03_optimizer/weight_AdaGrad.pkl", 'rb')
+        self['AdaGrad'].params = pickle.load(f)
+        f.close()
+        
+        f = open("/projects/mnist_cnn/03_optimizer/weight_Adam.pkl", 'rb')
+        self['Adam'].params = pickle.load(f)
+        f.close()
+        """
+        
 
         #계층생성
         self.layers = OrderedDict()
