@@ -19,9 +19,9 @@ tmp_time = start_time
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, normalize=False,  one_hot_label=True) #(60000,784)(60000,10)(10000,784)(10000,10)
 
 #2.하이퍼 파라미터 설정
-iters_num =  10                   #반복횟수
+iters_num =   1000                   #반복횟수
 train_size = x_train.shape[0]   #훈련데이터의 양 60000
-batch_size = 1000                 #미니배치 크기 100
+batch_size = 100                #미니배치 크기 100
 
 #3.매개변수 갱신 기법 설정
 optimizers = {}
@@ -84,21 +84,19 @@ for key in optimizers.keys():
     print(" test acc : " + str(test_acc_list[key]))
 
 #5.그래프 그리기
-from 
-
 plt.figure(1)
 markers = {"SGD": "o", "Momentum": "x", "AdaGrad": "s", "Adam": "D"}
 colors  = {"SGD": "xkcd:orange", "Momentum": "xkcd:green", "AdaGrad": "xkcd:azure", "Adam": "xkcd:red"}
 x = np.arange(iters_num)
 plt.xlabel("iterations")
 for key in optimizers.keys():
-    plt.plot(x, train_loss_list[key], marker=markers[key], markevery=10, color=colors[key], label=key)
+    plt.plot(x, train_loss_list[key], marker=markers[key], markevery=100, color=colors[key], label=key)
 plt.ylabel("loss")
 plt.ylim(0, 4)
 plt.legend()
 plt.show
 plt.draw()
-plt.savefig(str(start_time) + '_loss.png', dpi=200)
+plt.savefig(str(start_time) + '_loss_all.png', dpi=200)
 
 plt.figure(2)
 markers = {"SGD": "o", "Momentum": "x", "AdaGrad": "s", "Adam": "D"}
@@ -106,13 +104,41 @@ colors  = {"SGD": "xkcd:orange", "Momentum": "xkcd:green", "AdaGrad": "xkcd:azur
 x = np.arange(iters_num)
 plt.xlabel("iterations")
 for key in optimizers.keys():
-    plt.plot(x, train_acc_list[key], marker=markers[key],  markevery=10, color=colors[key], label=key)
+    plt.plot(x, train_acc_list[key], marker=markers[key],  markevery=100, color=colors[key], label=key)
 plt.ylabel("acc")
-plt.ylim(0, 1)
+plt.ylilim(0, 1)
 plt.legend()
 plt.show()
 plt.draw()
-plt.savefig(str(start_time) + '_acc.png', dpi=200)
+plt.savefig(str(start_time) + '_acc_all.png', dpi=200)
+
+plt.figure(3)
+markers = {"SGD": "o", "Momentum": "x", "AdaGrad": "s", "Adam": "D"}
+colors  = {"SGD": "xkcd:orange", "Momentum": "xkcd:green", "AdaGrad": "xkcd:azure", "Adam": "xkcd:red"}
+x = np.arange(iters_num)
+plt.xlabel("iterations")
+for key in optimizers.keys():
+    plt.plot(x, train_loss_list[key], marker=markers[key], markevery=100, color=colors[key], label=key)
+plt.ylabel("loss")
+plt.ylim(0, 1)
+plt.legend()
+plt.show
+plt.draw()
+plt.savefig(str(start_time) + '_loss_detail.png', dpi=200)
+
+plt.figure(4)
+markers = {"SGD": "o", "Momentum": "x", "AdaGrad": "s", "Adam": "D"}
+colors  = {"SGD": "xkcd:orange", "Momentum": "xkcd:green", "AdaGrad": "xkcd:azure", "Adam": "xkcd:red"}
+x = np.arange(iters_num)
+plt.xlabel("iterations")
+for key in optimizers.keys():
+    plt.plot(x, train_acc_list[key], marker=markers[key],  markevery=10, color=colors[key], label=key)
+plt.ylabel("acc")
+plt.ylilim(0.95, 1)
+plt.legend()
+plt.show()
+plt.draw()
+plt.savefig(str(start_time) + '_acc_detail.png', dpi=200)
 
 #5.총 걸린시간    
 end_time = time.time()
