@@ -42,13 +42,7 @@ for key in optimizers.keys():
     train_loss_list[key] = []  #딕셔너리안 리스트 생성성
     train_acc_list[key] = []
     test_acc_list[key] = []
-"""
-#2.저장된 가중치 초기값 불러오기 answpwja
-for key in optimizers.keys():
-    f = open("/projects/mnist_cnn/03_optimizer/weight_" + key + ".pkl", 'rb')
-    networks[key].params = pickle.load(f)
-    f.close()
-"""
+
 #3.학습 시작
 for i in range(iters_num):
     batch_mask = np.random.choice(train_size, batch_size) #(100,)
