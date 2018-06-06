@@ -6,9 +6,20 @@ I am student. learning about machine learning from september 27, 2017. Uloading 
 <hr/>
 
 ## 1. Python basics
- ### 1.1. Install Python3
- <pre><code>sudo apt-get install python3</code></pre>
- <pre><code>sudo apt-get install python3</code></pre>
+ ### 1.1. Initial Configuration
+  #### 1.1.1 Install Python3
+  <pre><code>sudo apt-get install python3</code></pre>
+  #### 1.1.2 Install External Libraries
+  We use numpy and matplotlib. Numpy is numerical calculation library. In this case we use numpy for numpy.array method and math 
+  algorithm.     
+  Matplotlib is draw graph library. We use it for experiment result visualization. furthermore during learning process 
+  * numpy
+  <pre><code>sudo pip install --upgrade pip
+  sudo pip install numpy</code></pre>
+  <pre><code>sudo pip install numpy</code></pre>
+  
+  * matplotlib
+  
  
 ## 2. Perceptron
 
