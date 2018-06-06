@@ -23,12 +23,14 @@ sudo pip install matplotlib</code></pre>
  ### 1.5. Matplotlib
 
 <hr/>
+
 ## 2. Perceptron
  ### 2.1. Logic circuit
  ### 2.2. What is perceptron?
  ### 2.3. Make perceptron
  
 <hr/>
+
 ## 3. Artificial neural network(ANN)
  ### 3.1. What is ANN?
  ### 3.2. Activation function
@@ -37,6 +39,7 @@ sudo pip install matplotlib</code></pre>
  ### 3.5. MNIST digit recognition
 
 <hr/>
+
 ## 4. Train neural network
  ### 4.1. Loss function
  ### 4.2. Numerical gradient
@@ -44,6 +47,7 @@ sudo pip install matplotlib</code></pre>
  ### 4.4. Make train algorithm
 
 <hr/>
+
 ## 5. backpropagrtion
  ### 5.1. Calculating graph
  ### 5.2. Simple backpropagation
@@ -52,6 +56,7 @@ sudo pip install matplotlib</code></pre>
  ### 5.5. Backpropagation
  
 <hr/> 
+
 ## 6. Optimizer
  ### 6.1. Update Parameters
  ### 6.2. Weight initial value
@@ -60,6 +65,7 @@ sudo pip install matplotlib</code></pre>
  ### 6.5. Valuable hyper parmeters
 
 <hr/> 
+
 ## 7. Convolution Neural Network(CNN)
  ### 7.1. Convoulution layer
  ### 7.2. Pooling layer
