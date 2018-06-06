@@ -37,7 +37,6 @@ sudo pip install matplotlib</code></pre>
  ### 3.5. MNIST digit recognition
 
 <hr/>
-
 ## 4. Train neural network
  ### 4.1. Loss function
  ### 4.2. Numerical gradient
@@ -45,7 +44,6 @@ sudo pip install matplotlib</code></pre>
  ### 4.4. Make train algorithm
 
 <hr/>
-
 ## 5. backpropagrtion
  ### 5.1. Calculating graph
  ### 5.2. Simple backpropagation
@@ -54,7 +52,6 @@ sudo pip install matplotlib</code></pre>
  ### 5.5. Backpropagation
  
 <hr/> 
-
 ## 6. Optimizer
  ### 6.1. Update Parameters
  ### 6.2. Weight initial value
