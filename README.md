@@ -1,5 +1,3 @@
-<hr/>
-
 # MNIST_CNN
 
 
@@ -14,6 +12,7 @@ work on making convolution neural network.
 # Explain 
 ## 00_neural_network
  Make neural network using python. I wrote down the details of the functions below.
+ 
  * [main.py]()
    * [sigmoid(x)](https://github.com/nayohan/mnist_cnn/wiki#32-activation-function)
    * [softmax(a)]()
@@ -50,7 +49,9 @@ Now we need to reduce the time using another algorithm. Replace numerical gradie
     * [SoftmaxWithLoss]()
     
 ## 03_optimizer
-The above is good enough. but the sooner the better. Using another parameter update algorithm, weight initial value, batch normalization and dropout. Actually in my code didn't applicable all thing.
+The above is good enough. but the sooner the better. Using another parameter update algorithm, weight initial value, batch normalization and dropout. Actually in my code didn't applicable all thing. It's need to be modified. Additionally this version has matplotlib.pyplot.
+That can show graph after the execution.
+
  * [optimizer.py]()
     * [SGD]()
     * [Momentum]()
@@ -60,7 +61,7 @@ The above is good enough. but the sooner the better. Using another parameter upd
     * [Adam]()
     
 ## 04_cnn
-
+Convolution neural network is different upper code. 
  * [backpropagation.py]()
     * [im2col]()
     * [col2im]() 
