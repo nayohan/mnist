@@ -61,7 +61,7 @@ That can show graph after the execution.
     * [Adam]()
     
 ## 04_cnn
-Convolution neural network is different upper code. 
+Convolution neural network is different upper code. IT
  * [backpropagation.py]()
     * [im2col]()
     * [col2im]() 
