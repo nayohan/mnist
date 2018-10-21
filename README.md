@@ -60,11 +60,7 @@ The above is good enough. but the sooner the better. Using another parameter upd
     * [Adam]()
     
 ## 04_cnn
-<<<<<<< HEAD
 Convolution neural network is different upper code. IT
-=======
-
->>>>>>> refs/heads/master
  * [backpropagation.py]()
     * [im2col]()
     * [col2im]() 
